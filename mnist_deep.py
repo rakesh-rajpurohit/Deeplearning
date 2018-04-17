@@ -70,6 +70,7 @@ def main(_):
     y_conv, keep_prob = deep_nn(x)
 
     cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels = y_, logits=y_conv))
+
     train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 
     correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
@@ -77,7 +78,7 @@ def main(_):
 
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
-        for i in range(20000):
+        for i in range(2000):
             batch = mnist.train.next_batch(50)
             if i%100 == 0:
                 train_accuracy = accuracy.eval(feed_dict={
